@@ -5,6 +5,7 @@ from langchain.vectorstores import FAISS
 from langchain.memory import ConversationBufferMemory
 from langchain.llms import HuggingFaceHub
 from langchain.chains import ConversationalRetrievalChain
+from dotenv import load_dotenv
 
 
 
@@ -30,6 +31,7 @@ def get_text_chunks(text):
 
 
 def get_vectorstore(text_chunks):
+    load_dotenv()
     embeddings = HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-xl")
     vectorstore = FAISS.from_texts(texts=text_chunks, embedding=embeddings)
     return vectorstore
